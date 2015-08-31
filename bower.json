@@ -1,0 +1,19 @@
+{
+  "name": "xml-editor",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "juicy-ace-editor": "~1.0.2",
+    "webcomponentsjs": "~0.7.12"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js",
+        "dist/fonts/*"
+      ]
+    }
+  }
+}
