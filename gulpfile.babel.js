@@ -35,8 +35,19 @@ const testLintOptions = {
 gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
-gulp.task('html', ['styles'], () => {
-  const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
+gulp.task('scripts', () => {
+  return gulp.src('app/scripts/**/*.js')
+    .pipe($.babel())
+    .pipe(gulp.dest('.tmp/scripts'));
+})
+
+gulp.task ('elements', () => {
+  return gulp.src('app/elements/**/*.html')
+    .pipe($.copy('dist/', {prefix:1}));
+});
+
+gulp.task('html', ['styles', 'scripts', 'elements'], () => {
+  const assets = $.useref.assets({searchPath: ['.tmp', '.']});
 
   return gulp.src('app/*.html')
     .pipe(assets)
@@ -113,7 +124,8 @@ gulp.task('serve:dist', () => {
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['dist']
+      baseDir: ['dist'],
+      https:true
     }
   });
 });

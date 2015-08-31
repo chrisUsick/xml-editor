@@ -29,7 +29,7 @@ class XmlEditor {
 		  xsltProcessor.importStylesheet(self.xslt);
 		  const resultDocument = xsltProcessor.transformToDocument(self.xml, document);
 		  let serializer = new XMLSerializer;
-		  $('juicy-ace-editor')[0].editor.setValue(vkbeautify.xml(serializer.serializeToString(resultDocument)),-1);	
+		  $('#output juicy-ace-editor')[0].editor.setValue(vkbeautify.xml(serializer.serializeToString(resultDocument)),-1);	
 		});
 	}
 
