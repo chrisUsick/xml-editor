@@ -42,8 +42,9 @@ gulp.task('scripts', () => {
 })
 
 gulp.task ('elements', () => {
-  return gulp.src('app/elements/**/*.html')
-    .pipe($.copy('dist/', {prefix:1}));
+  return gulp.src('bower_components/**')
+    .pipe($.copy('dist/', {prefix:0}));
+    // .pipe(gulp.dest('dist/bower_components/'))
 });
 
 gulp.task('html', ['styles', 'scripts', 'elements'], () => {
