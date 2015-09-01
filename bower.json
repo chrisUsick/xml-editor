@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "juicy-ace-editor": "~1.0.2",
-    "webcomponentsjs": "~0.7.12"
+    "webcomponentsjs": "~0.7.12",
+    "vkbeautify": "*"
   },
   "overrides": {
     "bootstrap": {
