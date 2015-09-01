@@ -7,7 +7,7 @@
     <title>xml editor</title>
 
     <!-- build:js scripts/webcomponents.js -->
-    <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
     <!-- endbuild -->
 
     <link rel="import" href="bower_components/juicy-ace-editor/src/juicy-ace-editor.html">
@@ -41,8 +41,11 @@
         <h3 class="text-muted">xml editor</h3>
       </div>
 
-      <div id="xml">
-        <input class="pull-right" accept="text/*" type="file">
+      <div id="xml" class="editor">
+        <div class="pull-right">
+          <input  accept="text/*" type="file">
+          <a href="" class="download">Download file</a>
+        </div>
         <h1>XML</h1>
         <form class="">
           <div class="form-group">
@@ -50,8 +53,11 @@
           </div>
         </form>
       </div>
-      <div id="xslt">
-        <input class="pull-right" accept="text/*" type="file">
+      <div id="xslt" class="editor">
+        <div class="pull-right">
+          <input accept="text/*" type="file">
+          <a href="" class="download">Download file</a>
+        </div>
         <h1>XSLT</h1>
         <form class="">
           <div class="form-group">
@@ -60,7 +66,10 @@
         </form>
       </div>
       <button class="btn btn-primary" id="compile">Compile</button>
-      <div id="output">
+      <div id="output" class="editor">
+        <div class="pull-right">
+          <a href="" class="download">Download file</a>
+        </div>
         <h1>Output</h1>
         <form class="">
           <div class="form-group">
