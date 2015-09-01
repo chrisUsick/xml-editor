@@ -2,5 +2,8 @@ node_modules
 dist
 .tmp
 .sass-cache
-bower_components
+bower_components/bootstrap
+bower_components/jquery
+bower_components/vkbeautify
+bower_components/webcomponentsjs
 test/bower_components
