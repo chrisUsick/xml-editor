@@ -1,1 +1,99 @@
-"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),XmlEditor=function(){function e(){_classCallCheck(this,e),this.xmlFile=null,this.xsltFile=null,self=this,$("input[type=file]").on("change",function(e){var t=e.target.files[0],r=$(e.target).parents();self.loadFile(t,r.filter(".editor").find("juicy-ace-editor")),"xml"==r.filter(".editor").attr("id")?self.xmlFile=t:self.xsltFile=t}),$("#compile").on("click",function(e){var t=new XSLTProcessor;t.importStylesheet(self.xslt);var r=t.transformToDocument(self.xml,document),n=new XMLSerializer;$("#output juicy-ace-editor")[0].editor.setValue(vkbeautify.xml(n.serializeToString(r)),-1)}),$("juicy-ace-editor").each(function(e,t){t.editor.on("input",function(){var r=$(t).parents(),n=r.filter(".editor").find(".download")[0],i=encodeURIComponent(t.editor.getValue());n.setAttribute("href","data:text/plain;charset=utf-8,"+i);var l;l=0==e?self.xmlFile.name:1==e?self.xsltFile.name:"output.html",n.setAttribute("download",l)})})}return _createClass(e,[{key:"xml",get:function(){var e=new DOMParser,t=$("#xml juicy-ace-editor")[0];return e.parseFromString(t.editor.getValue(),"text/xml")}},{key:"xslt",get:function(){var e=new DOMParser,t=$("#xslt juicy-ace-editor")[0];return e.parseFromString(t.editor.getValue(),"text/xml")}}]),_createClass(e,[{key:"loadFile",value:function(e,t){var r=new FileReader;r.onload=function(e){t[0].editor.setValue(vkbeautify.xml(e.target.result),-1)},r.readAsText(e)}}]),e}();$(function(){new XmlEditor});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),XmlEditor=function(){function e(){_classCallCheck(this,e),this.xmlText="",this.xsltText="",self=this,$("input[type=file]").on("change",function(e){var t=e.target.files[0],r=$(e.target).parent();self.loadFile(t,r[0].id,r.find("form juicy-ace-editor"))}),$("#compile").on("click",function(e){var t=new XSLTProcessor;t.importStylesheet(self.xslt);var r=t.transformToDocument(self.xml,document),n=new XMLSerializer;$("#output juicy-ace-editor")[0].editor.setValue(vkbeautify.xml(n.serializeToString(r)),-1)})}return _createClass(e,[{key:"xml",get:function(){var e=new DOMParser;return e.parseFromString(this.xmlText,"text/xml")}},{key:"xslt",get:function(){var e=new DOMParser;return e.parseFromString(this.xsltText,"text/xml")}}]),_createClass(e,[{key:"loadFile",value:function(e,t,r){var n=new FileReader,i=this;n.onload=function(e){r[0].editor.setValue(vkbeautify.xml(e.target.result),-1),i[t+"Text"]=e.target.result},n.readAsText(e)}}]),e}();$(function(){new XmlEditor});var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),XmlEditor=function(){function e(){_classCallCheck(this,e),this.xmlText="",this.xsltText="",self=this,$("input[type=file]").on("change",function(e){var t=e.target.files[0],r=$(e.target).parent();self.loadFile(t,r[0].id,r.find("form juicy-ace-editor"))}),$("#compile").on("click",function(e){var t=new XSLTProcessor;t.importStylesheet(self.xslt);var r=t.transformToDocument(self.xml,document),n=new XMLSerializer;$("#output juicy-ace-editor")[0].editor.setValue(vkbeautify.xml(n.serializeToString(r)),-1)})}return _createClass(e,[{key:"xml",get:function(){var e=new DOMParser;return e.parseFromString(this.xmlText,"text/xml")}},{key:"xslt",get:function(){var e=new DOMParser;return e.parseFromString(this.xsltText,"text/xml")}}]),_createClass(e,[{key:"loadFile",value:function(e,t,r){var n=new FileReader,i=this;n.onload=function(e){r[0].editor.setValue(vkbeautify.xml(e.target.result),-1),i[t+"Text"]=e.target.result},n.readAsText(e)}}]),e}();$(function(){new XmlEditor});
+'use strict'
+/**
+ * Main application class
+ */
+class XmlEditor {
+	/**
+	 * computed property returning the XML document based on the xml text
+	 * @return {XMLDocument} XML document based on the xml text
+	 */
+	get xml () {
+		let domParser = new DOMParser();
+		let ace = $('#xml juicy-ace-editor')[0];
+		return domParser.parseFromString(ace.editor.getValue(), 'text/xml');
+	}
+
+	/**
+	 * computed property: XML document based on the XSLT text
+	 * @return {XMLDocument} XSLT document
+	 */		
+	get xslt () {
+		let domParser = new DOMParser();
+		let ace = $('#xslt juicy-ace-editor')[0];
+		return domParser.parseFromString(ace.editor.getValue(), 'text/xml');
+	}
+
+	/**
+	 * instantiate event listeners
+	 * @return {XmlEditor} return new XmlEditor object
+	 */
+	constructor (){
+		this.xmlFile = null;
+		this.xsltFile = null;
+		self = this;
+
+		// upload file 
+		$('input[type=file]').on('change', function (ev) {
+			let file = ev.target.files[0];
+			let parents = $(ev.target).parents();
+			console.log('input change', ev.target, parents);
+			self.loadFile(file, parents.filter('.editor').find('juicy-ace-editor'));
+			// keep reference to the file object
+			if (parents.filter('.editor').attr('id')=='xml'){
+				self.xmlFile = file;
+			} else {
+				self.xsltFile = file;
+			}
+		});
+
+		// compile
+		$('#compile').on('click', function (ev){
+			let xsltProcessor = new XSLTProcessor();
+		  xsltProcessor.importStylesheet(self.xslt);
+		  const resultDocument = xsltProcessor.transformToDocument(self.xml, document);
+		  let serializer = new XMLSerializer;
+		  $('#output juicy-ace-editor')[0].editor.setValue(vkbeautify.xml(serializer.serializeToString(resultDocument)),-1);	
+		});
+
+		// download files
+		$('juicy-ace-editor').each(function(i, ace){
+			ace.editor.on('input', function() {
+				let parents = $(ace).parents();
+				let anchor = parents.filter('.editor').find('.download')[0];
+				// see http://stackoverflow.com/a/18197341 for explanation
+				let text = encodeURIComponent(ace.editor.getValue());
+				anchor.setAttribute('href', `data:text/plain;charset=utf-8,${text}`);
+				var fileName;
+				if (i == 0) fileName = self.xmlFile.name;
+				else if (i == 1) fileName = self.xsltFile.name;
+				else fileName = 'output.html';
+				anchor.setAttribute('download', fileName);
+			})
+		})
+	}
+
+
+	/**
+	 * read a file as text and put it in an editor
+	 * @param  {File} file     file to read
+	 * @param  {JQuery<juicy-ace-editor>} jquery object containing juicy-ace-editor 
+	 * @return {void}          
+	 */
+	loadFile (file, textarea) {
+		let reader = new FileReader();
+		let self = this;
+		reader.onload = function(text){
+			console.log(textarea);
+			textarea[0].editor.setValue( vkbeautify.xml(text.target.result), -1);
+		}
+		reader.readAsText(file);
+	}
+}
+
+$(function () {
+	
+	// on file load
+	let xmlEditor = new XmlEditor();
+
+	
+})
