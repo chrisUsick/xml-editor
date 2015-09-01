@@ -2,6 +2,11 @@ node_modules
 dist
 .tmp
 .sass-cache
+bower_components/ace-builds/demo
+bower_components/ace-builds/src
+bower_components/ace-builds/src-noconflict
+bower_components/ace-builds/src-min
+bower_components/ace-builds/textarea
 bower_components/bootstrap
 bower_components/jquery
 bower_components/vkbeautify
