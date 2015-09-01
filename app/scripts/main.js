@@ -36,6 +36,7 @@ class XmlEditor {
 		$('input[type=file]').on('change', function (ev) {
 			let file = ev.target.files[0];
 			let parents = $(ev.target).parents();
+			console.log('input change', ev.target, parents);
 			self.loadFile(file, parents.filter('.editor').find('juicy-ace-editor'));
 			// keep reference to the file object
 			if (parents.filter('.editor').attr('id')=='xml'){
@@ -82,6 +83,7 @@ class XmlEditor {
 		let reader = new FileReader();
 		let self = this;
 		reader.onload = function(text){
+			console.log(textarea);
 			textarea[0].editor.setValue( vkbeautify.xml(text.target.result), -1);
 		}
 		reader.readAsText(file);
