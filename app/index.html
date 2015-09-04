@@ -33,12 +33,13 @@
     
     <div class="container">
       <div class="header">
-        <!-- <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
+        <ul class="nav nav-pills pull-right">
+          <!-- <li class="active"><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul> -->
-        <h3 class="text-muted">xml editor</h3>
+          <li><a href="#">Contact</a></li> -->
+          <li><a href="#help" data-toggle="modal" data-target="#help">Help</a></li>
+        </ul>
+        <h3 class="text-muted">XML Editor</h3>
       </div>
 
       <div id="xml" class="editor">
@@ -78,18 +79,41 @@
         </form>
       </div>
       <div class="footer">
-        <p>♥ from the Yeoman team</p>
+        <p>Made by <a href="http://www.ninefinecode.com">ninefinecode.com</a> | <a href="https://github.com/chrisUsick/xml-editor">Source Code</a></p>
+      </div>
+    </div>
+
+
+    <div id="help" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Help</h4>
+          </div>
+          <div class="modal-body">
+            <article>
+              <h2>Usage:</h2>
+              <p>Upload or write some XML and XSLT in the editors. Press compile to apply your transformation to the XML.</p>
+              <p>The download link will allow you to download the file.</p>
+            </article>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+          </div>
+        </div>
       </div>
     </div>
     
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-67213740-1', 'auto');
+      ga('send', 'pageview');
+
     </script>
 
     <!-- build:js scripts/vendor.js -->
