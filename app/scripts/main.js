@@ -13,14 +13,29 @@ class XmlEditor {
 		return domParser.parseFromString(ace.editor.getValue(), 'text/xml');
 	}
 
+	get xmlText() {
+		let ace = $('#xml juicy-ace-editor')[0];
+		return ace.editor.getValue();
+	}
+
 	/**
 	 * computed property: XML document based on the XSLT text
 	 * @return {XMLDocument} XSLT document
-	 */		
+	 */
 	get xslt () {
 		let domParser = new DOMParser();
 		let ace = $('#xslt juicy-ace-editor')[0];
 		return domParser.parseFromString(ace.editor.getValue(), 'text/xml');
+	}
+
+	get xsltText() {
+		let ace = $('#xslt juicy-ace-editor')[0];
+		return ace.editor.getValue();
+	}
+
+	get xsd () {
+		let ace = $('#xsd juicy-ace-editor')[0];
+		return ace.editor.getValue();
 	}
 
 	/**
@@ -30,9 +45,10 @@ class XmlEditor {
 	constructor (){
 		this.xmlFile = null;
 		this.xsltFile = null;
+		this.xsdFile = null;
 		self = this;
 
-		// upload file 
+		// upload file
 		$('input[type=file]').on('change', function (ev) {
 			let file = ev.target.files[0];
 			let parents = $(ev.target).parents();
@@ -41,8 +57,10 @@ class XmlEditor {
 			// keep reference to the file object
 			if (parents.filter('.editor').attr('id')=='xml'){
 				self.xmlFile = file;
-			} else {
+			} else if (parents.filter('.editor').attr('id')=='xslt'){
 				self.xsltFile = file;
+			} else {
+				self.xsdFile = file;
 			}
 		});
 
@@ -52,8 +70,20 @@ class XmlEditor {
 		  xsltProcessor.importStylesheet(self.xslt);
 		  const resultDocument = xsltProcessor.transformToDocument(self.xml, document);
 		  let serializer = new XMLSerializer;
-		  $('#output juicy-ace-editor')[0].editor.setValue(vkbeautify.xml(serializer.serializeToString(resultDocument)),-1);	
+		  $('#output juicy-ace-editor')[0].editor.setValue(vkbeautify.xml(serializer.serializeToString(resultDocument)),-1);
 		});
+
+		// validate
+		$('#validate').on('click', (ev) => {
+			let result = xmllint.validateXML({xml:self.xmlText, schema:self.xsd});
+			let ace = $('#output juicy-ace-editor')[0];
+			if (result.errors) {
+				ace.editor.setValue(result.errors.join('\n'));
+			} else {
+				ace.editor.setValue('XML validates against XSD');
+			}
+
+		})
 
 		// download files
 		$('juicy-ace-editor').each(function(i, ace){
@@ -76,8 +106,8 @@ class XmlEditor {
 	/**
 	 * read a file as text and put it in an editor
 	 * @param  {File} file     file to read
-	 * @param  {JQuery<juicy-ace-editor>} jquery object containing juicy-ace-editor 
-	 * @return {void}          
+	 * @param  {JQuery<juicy-ace-editor>} jquery object containing juicy-ace-editor
+	 * @return {void}
 	 */
 	loadFile (file, textarea) {
 		let reader = new FileReader();
@@ -91,9 +121,9 @@ class XmlEditor {
 }
 
 $(function () {
-	
+
 	// on file load
 	let xmlEditor = new XmlEditor();
 
-	
+
 })

@@ -37,7 +37,9 @@ gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
+    .pipe($.sourcemaps.init())
     .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/scripts'));
 })
 
@@ -116,6 +118,7 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.css', ['styles']);
+  gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
