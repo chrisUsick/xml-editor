@@ -37,7 +37,9 @@ gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
+    .pipe($.sourcemaps.init())
     .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/scripts'));
 })
 
@@ -45,6 +47,11 @@ gulp.task ('elements', () => {
   return gulp.src('bower_components/**')
     .pipe($.copy('dist/', {prefix:0}));
     // .pipe(gulp.dest('dist/bower_components/'))
+});
+
+gulp.task ('copy', () => {
+  return gulp.src(['app/test-files/*', 'app/assets/xmljs/xmllint.js'])
+    .pipe($.copy('dist/', {prefix:1}));
 });
 
 gulp.task('html', ['styles', 'scripts', 'elements'], () => {
@@ -116,6 +123,7 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.css', ['styles']);
+  gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
@@ -158,7 +166,7 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['html', 'images', 'fonts', 'extras', 'copy'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 

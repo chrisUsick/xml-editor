@@ -68,6 +68,17 @@ body {
   margin-top: 28px;
 }
 
+/* balance the 2 editors */
+.fake-nav-tabs {
+  height: 42px;
+}
+
+/*smaller than tablet hide space */
+@media (max-width: 990px) {
+  .fake-nav-tabs {
+    height:0px;
+  }
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
