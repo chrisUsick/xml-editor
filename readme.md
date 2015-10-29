@@ -9,3 +9,5 @@ This is a HTML5 app for writing XSLT. See the (demo)[[http://chrisusick.github.i
 - [web components](http://webcomponents.org/)
 
 # building production site
+- commit app when `gulp serve:dist` workds
+- switch to branch
