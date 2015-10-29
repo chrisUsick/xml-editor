@@ -49,6 +49,11 @@ gulp.task ('elements', () => {
     // .pipe(gulp.dest('dist/bower_components/'))
 });
 
+gulp.task ('copy', () => {
+  return gulp.src(['app/test-files/*', 'app/assets/xmljs/xmllint.js'])
+    .pipe($.copy('dist/', {prefix:1}));
+});
+
 gulp.task('html', ['styles', 'scripts', 'elements'], () => {
   const assets = $.useref.assets({searchPath: ['.tmp', '.']});
 
@@ -161,7 +166,7 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['html', 'images', 'fonts', 'extras', 'copy'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
