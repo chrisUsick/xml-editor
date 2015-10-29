@@ -85,6 +85,12 @@ class XmlEditor {
 
 		})
 
+		// load example
+		$('#example').on('click', (ev) => {
+			self.loadExampleFile('example_5.xml', 'xml');
+			self.loadExampleFile('example_5.xsl', 'xslt');
+			self.loadExampleFile('example_5.xsd', 'xsd');
+		})
 		// download files
 		$('juicy-ace-editor').each(function(i, ace){
 			ace.editor.on('input', function() {
@@ -94,12 +100,29 @@ class XmlEditor {
 				let text = encodeURIComponent(ace.editor.getValue());
 				anchor.setAttribute('href', `data:text/plain;charset=utf-8,${text}`);
 				var fileName;
-				if (i == 0) fileName = self.xmlFile.name;
-				else if (i == 1) fileName = self.xsltFile.name;
+				if (i == 0) fileName = self.xmlFile ? self.xmlFile.name : 'example.xml';
+				else if (i == 1) fileName = self.xsltFile ? self.xsltFile.name : 'example.xsl';
+				else if (i == 2) fileName = self.xsdFile ? self.xsdFile.name :'example.xsd';
 				else fileName = 'output.html';
 				anchor.setAttribute('download', fileName);
 			})
 		})
+	}
+
+	/**
+	 * load example file and insert it into the appropriate editor
+	 * @param  {string} fileName name of the example file
+	 * @param  {string} editorId id of the div containing the editor (no hash)
+	 */
+	loadExampleFile (fileName, editorId) {
+		$.ajax({
+				method:'GET',
+				url:`test-files/${fileName}`,
+				dataType:'text'
+			}).done((data) => {
+				let ace = $(`#${editorId} juicy-ace-editor`)[0];
+				ace.editor.setValue(data);
+			});
 	}
 
 

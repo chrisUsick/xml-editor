@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<maintenanceOrder orderDate="2000-10-20">
+	<maintainMachine>
+		<name>welding robot</name>
+		<shopFloor>washing machine</shopFloor>
+		<company>Tuzla Mfg.</company>
+		<city>Tuzla</city>
+		<street>Partizanska 12</street>
+		<phone>740-7490</phone>
+	</maintainMachine>
+	<delivery>
+		<name>Tuzla Washing Machine Production</name>
+		<street>Partizanska 12</street>
+		<city>Tuzla</city>
+		<contactPerson>Mirza Presley</contactPerson>
+		<email>contact@tuzlawmp.com</email>
+	</delivery>
+	<comment>Order must be completed in five days.
+  </comment>
+	<machineToInspect>
+		<machine partNum="16-PUI">
+			<partName>Processing unit</partName>
+			<quantity>1</quantity>
+			<documentation>Manual pages 12-23</documentation>
+			<comment>First to test</comment>
+		</machine>
+		<machine partNum="14-ELE">
+			<partName>electrode</partName>
+			<quantity>4</quantity>
+			<documentation>Manual pages 31-33</documentation>
+			<availability>yes</availability>
+		</machine>
+		<machine partNum="12-PSU">
+			<partName>power supply unit</partName>
+			<quantity>1</quantity>
+			<documentation>Manual pages 45-51</documentation>
+			<availability>to be ordered</availability>
+		</machine>
+	</machineToInspect>
+</maintenanceOrder>

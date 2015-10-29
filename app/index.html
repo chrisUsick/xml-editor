@@ -43,8 +43,9 @@
       </div>
       <div class="row">
         <div id="xml" class="editor col-md-6">
+          <div class="fake-nav-tabs"></div>
           <div class="pull-right">
-            <input  accept="text/*" type="file">
+            <input accept="text/*" type="file" data-toggle="tooltip" data-placement="top" title="Hint: you can drag 'n drop">
             <a href="" class="download">Download file</a>
           </div>
           <h1>XML</h1>
@@ -62,7 +63,7 @@
           <div class="tab-content">
             <div class="tab-pane active editor " id="xslt">
               <div class="pull-right">
-                <input accept="text/*" type="file">
+                <input accept="text/*" type="file" data-toggle="tooltip" data-placement="top" title="Hint: you can drag 'n drop">
                 <a href="" class="download">Download file</a>
               </div>
               <h1>XSLT</h1>
@@ -74,7 +75,7 @@
             </div>
             <div class="tab-pane editor" id="xsd">
               <div class="pull-right">
-                <input accept=".xsd" type="file">
+                <input accept=".xsd" type="file" data-toggle="tooltip" data-placement="top" title="Hint: you can drag 'n drop">
                 <a href="" class="download">Download file</a>
               </div>
               <h1>XSD</h1>
@@ -90,6 +91,7 @@
 
       <button class="btn btn-primary" id="compile">Compile</button>
       <button class="btn btn-default" id="validate">Validate against XSD</button>
+      <button class="btn btn-info" id="example">Load example</button>
       <div id="output" class="editor">
         <div class="pull-right">
           <a href="" class="download">Download file</a>
@@ -118,6 +120,7 @@
             <article>
               <h2>Usage:</h2>
               <p>Upload or write some XML and XSLT in the editors. Press compile to apply your transformation to the XML.</p>
+              <p>Write XSD in the XSD editor and chose validate against XSD to get libxml (really good) error messages!</p>
               <p>The download link will allow you to download the file.</p>
             </article>
           </div>
