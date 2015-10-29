@@ -9,3 +9,11 @@ This is a HTML5 app for writing XSLT. See the (demo)[[http://chrisusick.github.i
 - [web components](http://webcomponents.org/)
 
 # building production site
+- commit app when `gulp serve:dist` workds
+- switch to branch `gh-pages-test`
+- merge `master` into `gh-pages-test`
+- copy the `dist/` directory files into the root
+  - `cp -r dist/* .`
+
+- commit `gh-pages-test` after it works
+- merge `gh-pages-test` to `gh-pages`
