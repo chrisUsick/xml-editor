@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:annotation>
+	<xsd:documentation>Maintenance order schema.</xsd:documentation> 
+</xsd:annotation>
+	
+  <xsd:element name="maintenanceOrder" type="maintenanceOrderType" /> 
+  
+  <xsd:element name="comment" type="xsd:string" /> 
+
+	<xsd:complexType name="maintenanceOrderType">
+		<xsd:sequence>
+		  <xsd:element name="maintainMachine" type="comAddress" /> 
+		  <xsd:element name="delivery" type="deliveryAddress" /> 
+		  <xsd:element ref="comment" minOccurs="0" /> 
+		  <xsd:element name="machineToInspect" type="machineType" /> 
+		</xsd:sequence>
+		<xsd:attribute name="orderDate" type="xsd:date" /> 
+	</xsd:complexType>
+
+	<xsd:complexType name="comAddress">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" /> 
+			<xsd:element name="shopFloor" type="xsd:string" /> 
+			<xsd:element name="company" type="xsd:string" /> 
+			<xsd:element name="city" type="xsd:string" /> 
+			<xsd:element name="street" type="xsd:string" /> 
+			<xsd:element name="phone" type="xsd:string" /> 
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="deliveryAddress">
+		<xsd:sequence>
+		  <xsd:element name="name" type="xsd:string" /> 
+		  <xsd:element name="street" type="xsd:string" /> 
+		  <xsd:element name="city" type="xsd:string" /> 
+		  <xsd:element name="contactPerson" type="xsd:string" /> 
+		  <xsd:element name="email" type="xsd:string" /> 
+	  </xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="machineType">
+		<xsd:sequence>
+			<xsd:element name="machine" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="partName" type="xsd:string" /> 
+						<xsd:element name="quantity">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:positiveInteger">
+									<xsd:maxExclusive value="200" /> 
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="documentation" type="xsd:string" /> 
+						<xsd:element name="availability" type="xsd:string" minOccurs="0" /> 
+						<xsd:element ref="comment" minOccurs="0" /> 
+					</xsd:sequence>
+					<xsd:attribute name="partNum" type="model" /> 
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="model">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\d{2}-[A-Z]{3}" /> 
+	  </xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
